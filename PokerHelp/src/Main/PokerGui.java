@@ -8,46 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.border.BevelBorder;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 import javax.swing.JFormattedTextField;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.ImageIcon;
 
 public class PokerGui extends JFrame {
 
 	private JPanel Gui;
 
-	/**
-	 Principal e
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PokerGui frame = new PokerGui();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public PokerGui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 450);
@@ -124,7 +95,7 @@ public class PokerGui extends JFrame {
 		Gui.add(spinner_3);
 		
 		JLabel lblPokerhelp = new JLabel("PokerHelp");
-		lblPokerhelp.setBounds(10, 11, 54, 14);
+		lblPokerhelp.setBounds(10, 11, 89, 14);
 		Gui.add(lblPokerhelp);
 		
 	}
