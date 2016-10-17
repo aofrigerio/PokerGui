@@ -1,8 +1,5 @@
 package Main;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,7 +14,6 @@ import javax.swing.SpinnerNumberModel;
 public class PokerGui extends JFrame {
 
 	private JPanel Gui;
-
 	
 	public PokerGui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,6 +27,13 @@ public class PokerGui extends JFrame {
 		JButton btnNewButton = new JButton("Sort");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				//classe modelo das variáveis
+				FuzzyPoker poker = new FuzzyPoker();
+				
+				//Lógica Fuzzy
+				LogicFuzzy fuzzy = new LogicFuzzy(poker);
+				fuzzy.Calcular();				
 			}
 		});
 		btnNewButton.setBounds(10, 377, 89, 23);
