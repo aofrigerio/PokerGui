@@ -8,11 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.border.BevelBorder;
 import java.awt.Component;
@@ -20,13 +22,15 @@ import java.awt.Dimension;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.JFormattedTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.ImageIcon;
 
 public class PokerGui extends JFrame {
 
 	private JPanel Gui;
 
 	/**
-	 * Launch the application.
+	 Principal e
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -71,6 +75,7 @@ public class PokerGui extends JFrame {
 		Gui.add(btnNewButton_1);
 		
 		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(2, 2, 8, 1));
 		spinner.setBounds(145, 346, 29, 20);
 		Gui.add(spinner);
 		
@@ -83,6 +88,7 @@ public class PokerGui extends JFrame {
 		Gui.add(lblJogadoresDesistiram);
 		
 		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(0, 0, 8, 1));
 		spinner_1.setToolTipText("Jogadores em FOLD");
 		spinner_1.setBounds(145, 226, 29, 20);
 		Gui.add(spinner_1);
@@ -92,6 +98,7 @@ public class PokerGui extends JFrame {
 		Gui.add(lblJogadoresNoJogo);
 		
 		JSpinner spinner_2 = new JSpinner();
+		spinner_2.setModel(new SpinnerNumberModel(0, 0, 8, 1));
 		spinner_2.setToolTipText("Quais jogadores ainda est\u00E3o na rodada");
 		spinner_2.setBounds(145, 264, 29, 20);
 		Gui.add(spinner_2);
@@ -111,8 +118,14 @@ public class PokerGui extends JFrame {
 		Gui.add(lblRaise);
 		
 		JSpinner spinner_3 = new JSpinner();
+		spinner_3.setModel(new SpinnerNumberModel(0, 0, 8, 1));
 		spinner_3.setToolTipText("Quais jogadores ainda est\u00E3o na rodada");
 		spinner_3.setBounds(145, 303, 29, 20);
 		Gui.add(spinner_3);
+		
+		JLabel lblPokerhelp = new JLabel("PokerHelp");
+		lblPokerhelp.setBounds(10, 11, 54, 14);
+		Gui.add(lblPokerhelp);
+		
 	}
 }
