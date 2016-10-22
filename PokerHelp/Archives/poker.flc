@@ -1,0 +1,84 @@
+FUNCTION_BLOCK poker
+
+// Define input variables
+VAR_INPUT
+    pote: REAL;
+    aposta: REAL;
+    fichas: REAL;
+    mao: REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    acao: REAL;
+END_VAR
+
+// termo linguístico da variavel de entrada 'POTE'
+FUZZIFY pote
+    TERM low := (0, 1) (4, 0) ; 
+    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM high := (6, 0) (10, 1);
+END_FUZZIFY
+
+// termo linguístico da variavel de entrada 'APOSTA'
+FUZZIFY aposta
+    TERM low := (0, 1) (4, 0) ; 
+    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM high := (6, 0) (10, 1);
+END_FUZZIFY
+
+// termo linguístico da variavel de entrada 'FICHAS'
+FUZZIFY fichas
+    TERM low := (0, 1) (4, 0) ; 
+    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM high := (6, 0) (10, 1);
+END_FUZZIFY
+
+// termo linguístico da variavel de entrada 'APOSTA'
+FUZZIFY mao
+    TERM low := (0, 1) (4, 0) ; 
+    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM high := (6, 0) (10, 1);
+END_FUZZIFY
+
+
+// Defzzzify output variable 'acao'
+DEFUZZIFY acao
+
+    TERM fold := (0,0) (15,1) (20,0);
+    TERM call := (20,0) (35,1) (40,0);
+    TERM raise := (40,0) (50,1) (60,0);
+
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 30;
+    
+END_DEFUZZIFY
+
+//REGRAS do POKER
+RULEBLOCK No1
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    //pote,aposta,fichas,mao
+
+    RULE 1 : IF mao IS low AND aposta IS mid AND fichas IS mid AND pote is mid
+                THEN acao IS fold;
+				
+	RULE 2 : IF mao IS mid AND aposta IS mid AND fichas IS mid AND pote is mid
+                THEN acao IS call;
+				
+	RULE 3 : IF mao IS high AND aposta IS mid AND fichas IS mid AND pote is mid
+                THEN acao IS raise;
+	
+	RULE 4 : IF mao IS high AND aposta IS high AND fichas IS high AND pote is high
+                THEN acao IS raise;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
