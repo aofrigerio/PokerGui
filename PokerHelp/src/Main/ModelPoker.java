@@ -2,41 +2,41 @@ package Main;
 
 public class ModelPoker {
 
-	private int pote,aposta,fichas,mao;
+	private double pote,aposta,fichas,mao;
 
-	public int getPote() {
+	public double getPote() {
 		return pote;
 	}
 
-	public void setPote(int pote) {
+	public void setPote(double pote) {
 		this.pote = pote;
 	}
 
-	public int getAposta() {
+	public double getAposta() {
 		return aposta;
 	}
 
-	public void setAposta(int aposta) {
+	public void setAposta(double aposta) {
 		this.aposta = aposta;
 	}
 
-	public int getFichas() {
+	public double getFichas() {
 		return fichas;
 	}
 
-	public void setFichas(int fichas) {
+	public void setFichas(double fichas) {
 		this.fichas = fichas;
 	}
 
-	public int getMao() {
+	public double getMao() {
 		return mao;
 	}
 
-	public void setMao(int mao) {
+	public void setMao(double mao) {
 		this.mao = mao;
 	}
 
-		
+			
 	
 	
 }

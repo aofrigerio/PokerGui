@@ -21,13 +21,14 @@ import net.sourceforge.jFuzzyLogic.rule.Variable;
 
 
 public class LogicFuzzy {
-
+	
+	ModelPoker poker;
 	private FIS fis;
 	int plotHeight, plotWidth; // Each plot's size 
 	int posx = 0, posy = 0; // Position each plot within the panel	
-	public LogicFuzzy(ModelPoker poker) {
-		
 	
+	public LogicFuzzy() {
+		
 	String fileName = "./Archives/poker.flc";
 	
 	fis = FIS.load(fileName,true);
@@ -36,17 +37,27 @@ public class LogicFuzzy {
 			JOptionPane.showConfirmDialog(null, "Arquivo impossível de abrir. Verifique");
 		}
 		
+}
+	
+	
+	public void Calcular(){
+		
+		try{
+			fis.evaluate();
+		} catch(Exception e){
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	
+	}
+	
+	public void setModelPoker(ModelPoker pk1){
+		this.poker = pk1;
+		
 		fis.setVariable("pote", poker.getAposta());	//aposta
 		fis.setVariable("aposta", poker.getFichas());	//fichas
 		fis.setVariable("fichas", poker.getMao());	//mao
 		fis.setVariable("mao", poker.getPote());	//pote
-	
-	}
-	
-	
-	public void Calcular(){
-		fis.evaluate();
-	
 	}
 	
 	public void Mostrar(){

@@ -15,7 +15,7 @@ END_VAR
 
 // termo linguístico da variavel de entrada 'POTE'
 FUZZIFY pote
-    TERM low := (0, 1) (4, 0) ; 
+    TERM low := (0, 1) (3, 0) ; 
     TERM mid := (3, 0) (4,1) (6,1) (8,0);
     TERM high := (6, 0) (10, 1);
 END_FUZZIFY

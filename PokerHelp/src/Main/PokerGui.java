@@ -27,25 +27,12 @@ import java.awt.Font;
 public class PokerGui extends JFrame {
 
 	private JPanel Gui;
-	
-	public MaskFormatter Mascara(String Mascara){
-        MaskFormatter F_Mascara = new MaskFormatter();
-        try{
-            F_Mascara.setMask(Mascara); //Atribui a mascara
-            F_Mascara.setPlaceholderCharacter(' '); //Caracter para preencimento 
-        }
-        catch (Exception excecao) {
-        excecao.printStackTrace();
-        } 
-        return F_Mascara;
-	}
-        
+
 	public PokerGui() {
 		
 		//Lógica Fuzzy
 		ModelPoker poker = new ModelPoker();
-		LogicFuzzy fuzzy = new LogicFuzzy(poker);
-		
+		LogicFuzzy fuzzy = new LogicFuzzy();
 		
 		//GUI
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,13 +44,10 @@ public class PokerGui extends JFrame {
 		setContentPane(Gui);
 		Gui.setLayout(null);
 		
-		JLabel lblValorPote = new JLabel("POTE TOTAL");
+		//JLABEL
+		JLabel lblValorPote = new JLabel("VALOR RODADA");
 		lblValorPote.setBounds(23, 329, 109, 14);
 		Gui.add(lblValorPote);
-		
-		JFormattedTextField frmtdtxtfldValorPote = new JFormattedTextField(Mascara("####"));
-		frmtdtxtfldValorPote.setBounds(23, 354, 109, 20);
-		Gui.add(frmtdtxtfldValorPote);
 		
 		JLabel lblPokerhelp = new JLabel("PokerHelp");
 		lblPokerhelp.setBounds(22, 34, 89, 14);
@@ -73,28 +57,13 @@ public class PokerGui extends JFrame {
 		lblAposta.setBounds(171, 329, 109, 14);
 		Gui.add(lblAposta);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField(Mascara("####"));
-		formattedTextField.setToolTipText("@ 11");
-		formattedTextField.setBounds(171, 353, 109, 20);
-		Gui.add(formattedTextField);
-		
 		JLabel lblMao = new JLabel("FICHAS");
 		lblMao.setBounds(318, 329, 109, 14);
 		Gui.add(lblMao);
-		
+			
 		JLabel lblMao_1 = new JLabel("MAO");
-		lblMao_1.setBounds(562, 329, 70, 14);
+		lblMao_1.setBounds(643, 329, 70, 14);
 		Gui.add(lblMao_1);
-		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField(Mascara("####"));
-		formattedTextField_1.setToolTipText("@ 11");
-		formattedTextField_1.setBounds(318, 353, 109, 20);
-		Gui.add(formattedTextField_1);
-		
-		JComboBox comboBox_7 = new JComboBox();
-		comboBox_7.setModel(new DefaultComboBoxModel(MaoEnum.values()));
-		comboBox_7.setBounds(509, 354, 171, 20);
-		Gui.add(comboBox_7);
 		
 		JLabel lblNewLabel = new JLabel("Decis\u00E3o: ");
 		lblNewLabel.setFont(new Font("Sitka Text", Font.PLAIN, 45));
@@ -106,6 +75,44 @@ public class PokerGui extends JFrame {
 		label.setBounds(108, 195, 194, 26);
 		Gui.add(label);
 		
+		JLabel lblPote = new JLabel("POTE");
+		lblPote.setBounds(450, 330, 109, 14);
+		Gui.add(lblPote);
+		
+		//JTEXT
+		
+		//rodada
+		JFormattedTextField txtrodada = new JFormattedTextField(Mascara("####"));
+		txtrodada.setBounds(23, 354, 109, 20);
+		txtrodada.setToolTipText("rodada");
+		Gui.add(txtrodada);
+		
+		//aposta
+		JFormattedTextField txtaposta = new JFormattedTextField(Mascara("####"));
+		txtaposta.setToolTipText("Aposta");
+		txtaposta.setBounds(171, 353, 109, 20);
+		Gui.add(txtaposta);
+		
+		//fichas
+		JFormattedTextField txtfichas = new JFormattedTextField(Mascara("####"));
+		txtfichas.setToolTipText("Fichas");
+		txtfichas.setBounds(318, 353, 109, 20);
+		Gui.add(txtfichas);
+		
+		//pote
+		JFormattedTextField txtpote = new JFormattedTextField(Mascara("####"));
+		txtpote.setToolTipText("Pote");
+		txtpote.setBounds(450, 354, 109, 20);
+		Gui.add(txtpote);
+		
+		//mao
+		JComboBox cmbmao = new JComboBox();
+		cmbmao.setModel(new DefaultComboBoxModel(MaoEnum.values()));
+		cmbmao.setBounds(585, 354, 171, 20);
+		Gui.add(cmbmao);
+		
+	
+		//botões		
 		JButton btnNewButton = new JButton("Calcular");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -113,40 +120,55 @@ public class PokerGui extends JFrame {
 				//classe modelo das variáveis
 				//ModelPoker poker = new ModelPoker();	
 			
-				MaoEnum opcao = (MaoEnum) comboBox_7.getSelectedItem(); //Retorna a opcao do menu
+				MaoEnum opcao = (MaoEnum) cmbmao.getSelectedItem(); //Retorna a opcao do menu
+			
 				
-				poker.setPote(4);
-				poker.setAposta(3);
-				poker.setFichas(4);
-				poker.setMao(opcao.getValor());
+				//JOptionPane.showMessageDialog(null, Double.parseDouble((String) txtpote.getValue())  / Double.parseDouble((String) txtrodada.getValue() ));
+				//JOptionPane.showMessageDialog(null, txtrodada.getValue());
+				//JOptionPane.showMessageDialog(null, txtaposta.getValue());
+				//JOptionPane.showMessageDialog(null, txtfichas.getValue());
 				
-				//Lógica Fuzzy
-				//LogicFuzzy fuzzy = new LogicFuzzy(poker);
-				fuzzy.Calcular();
-				fuzzy.Mostrar();
-				//fuzzy.grafico();
+				//Total da rodada / valor * 100 = achamos a pocentagem. melhor para modelagem
 				
 				
-				if(fuzzy.getDeffuzy() >= 0 & fuzzy.getDeffuzy() < 20){
-					lblNewLabel.setText("Decisão: Corre (Fold)");
+				try{
+					
+					poker.setPote( Double.parseDouble((String) txtpote.getValue())  / Double.parseDouble((String) txtrodada.getValue() ) * 10);
+					poker.setAposta(Double.parseDouble((String) txtaposta.getValue()) / Double.parseDouble((String) txtrodada.getValue())* 10);
+					poker.setFichas(Double.parseDouble((String) txtfichas.getValue()) / Double.parseDouble((String) txtrodada.getValue())* 10);
+					poker.setMao(opcao.getValor());
+					
+				}catch(NumberFormatException e){
+					//JOptionPane.showMessageDialog(null, e);
+					JOptionPane.showMessageDialog(null, "Insira valores nas caixas");
 				}
-				
-				if((fuzzy.getDeffuzy() >= 20) & (fuzzy.getDeffuzy() < 40)){
-					lblNewLabel.setText("Decisão: Continue (Check)");
-				}
-				
-				if(fuzzy.getDeffuzy() > 40 & fuzzy.getDeffuzy() <= 60){
-					lblNewLabel.setText("Decisão: Aumenta (Raise)");
-				}
-				
-				label.setText("Valor: " + fuzzy.getDeffuzy());
-				
-				
-				
-				
-			}
+					
+					//Lógica Fuzzy
+					//LogicFuzzy fuzzy = new LogicFuzzy(poker);
+					fuzzy.setModelPoker(poker);
+					fuzzy.Calcular();
+					fuzzy.Mostrar();
+					
+					
+						if(fuzzy.getDeffuzy() >= 0 & fuzzy.getDeffuzy() < 20){
+							lblNewLabel.setText("Decisão: Corre (Fold)");
+						}
+						
+						if((fuzzy.getDeffuzy() >= 20) & (fuzzy.getDeffuzy() < 40)){
+							lblNewLabel.setText("Decisão: Continue (Check)");
+						}
+						
+						if(fuzzy.getDeffuzy() > 40 & fuzzy.getDeffuzy() <= 60){
+							lblNewLabel.setText("Decisão: Aumenta (Raise)");
+						}
+						
+						label.setText("Valor: " + fuzzy.getDeffuzy());
+						}
+	
+
+			
 		});
-		btnNewButton.setBounds(591, 395, 89, 23);
+		btnNewButton.setBounds(667, 395, 89, 23);
 		Gui.add(btnNewButton);
 		
 		JButton btnInicio = new JButton("Inicio Partida");
@@ -170,8 +192,7 @@ public class PokerGui extends JFrame {
 		btnPerdeu.setBounds(318, 395, 109, 23);
 		Gui.add(btnPerdeu);
 		
-	
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -225,6 +246,18 @@ public class PokerGui extends JFrame {
 		
 		
 		
+	}
+	
+	public MaskFormatter Mascara(String Mascara){
+        MaskFormatter F_Mascara = new MaskFormatter();
+        try{
+            F_Mascara.setMask(Mascara); //Atribui a mascara
+            F_Mascara.setPlaceholderCharacter(' '); //Caracter para preencimento 
+        }
+        catch (Exception excecao) {
+        excecao.printStackTrace();
+        } 
+        return F_Mascara;
 	}
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {
