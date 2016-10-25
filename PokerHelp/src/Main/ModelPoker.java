@@ -1,35 +1,42 @@
 package Main;
 
-public class FuzzyPoker {
+public class ModelPoker {
+
+	private int pote,aposta,fichas,mao;
+
+	public int getPote() {
+		return pote;
+	}
+
+	public void setPote(int pote) {
+		this.pote = pote;
+	}
+
+	public int getAposta() {
+		return aposta;
+	}
+
+	public void setAposta(int aposta) {
+		this.aposta = aposta;
+	}
+
+	public int getFichas() {
+		return fichas;
+	}
+
+	public void setFichas(int fichas) {
+		this.fichas = fichas;
+	}
+
+	public int getMao() {
+		return mao;
+	}
+
+	public void setMao(int mao) {
+		this.mao = mao;
+	}
+
+		
 	
-	private int players,raise,fold;
-
-	public int getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(int players) {
-		this.players = players;
-	}
-
-	public int getRaise() {
-		return raise;
-	}
-
-	public void setRaise(int raise) {
-		this.raise = raise;
-	}
-
-	public int getFold() {
-		return fold;
-	}
-
-	public void setFold(int fold) {
-		this.fold = fold;
-	}
 	
-	
-	
-	
-
 }

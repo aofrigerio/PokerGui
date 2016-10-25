@@ -16,28 +16,28 @@ END_VAR
 // termo linguístico da variavel de entrada 'POTE'
 FUZZIFY pote
     TERM low := (0, 1) (4, 0) ; 
-    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM mid := (3, 0) (4,1) (6,1) (8,0);
     TERM high := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'APOSTA'
 FUZZIFY aposta
     TERM low := (0, 1) (4, 0) ; 
-    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM mid := (3, 0) (4,1) (6,1) (8,0);
     TERM high := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'FICHAS'
 FUZZIFY fichas
     TERM low := (0, 1) (4, 0) ; 
-    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM mid := (3, 0) (4,1) (6,1) (8,0);
     TERM high := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'APOSTA'
 FUZZIFY mao
     TERM low := (0, 1) (4, 0) ; 
-    TERM mid := (3, 0) (4,1) (6,1) (10,0);
+    TERM mid := (3, 0) (4,1) (6,1) (8,0);
     TERM high := (6, 0) (10, 1);
 END_FUZZIFY
 
@@ -45,8 +45,8 @@ END_FUZZIFY
 // Defzzzify output variable 'acao'
 DEFUZZIFY acao
 
-    TERM fold := (0,0) (15,1) (20,0);
-    TERM call := (20,0) (35,1) (40,0);
+    TERM fold := (0,0) (10,1) (30,0);
+    TERM call := (20,0) (30,1) (50,0);
     TERM raise := (40,0) (50,1) (60,0);
 
     METHOD : COG;
