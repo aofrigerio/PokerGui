@@ -3,6 +3,15 @@ package Main;
 public class ModelPoker {
 
 	private double pote,aposta,fichas,mao;
+	
+	public ModelPoker(){
+		
+		pote = 0;
+		aposta = 0;
+		fichas = 0;
+		mao = 0;
+		
+	}
 
 	public double getPote() {
 		return pote;

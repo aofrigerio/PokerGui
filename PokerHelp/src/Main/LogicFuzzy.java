@@ -54,10 +54,10 @@ public class LogicFuzzy {
 	public void setModelPoker(ModelPoker pk1){
 		this.poker = pk1;
 		
-		fis.setVariable("pote", poker.getAposta());	//aposta
-		fis.setVariable("aposta", poker.getFichas());	//fichas
-		fis.setVariable("fichas", poker.getMao());	//mao
-		fis.setVariable("mao", poker.getPote());	//pote
+		fis.setVariable("aposta", poker.getAposta());	//aposta
+		fis.setVariable("fichas", poker.getFichas());	//fichas
+		fis.setVariable("mao", poker.getMao());	//mao
+		fis.setVariable("pote", poker.getPote());	//pote
 	}
 	
 	public void Mostrar(){
@@ -73,8 +73,10 @@ public class LogicFuzzy {
 	public void grafico(){
 		
 		JDialogFis fis = new JDialogFis(this.fis);
-		
+	
 	}
+	
+	
 	
 	public FIS getFis(){
 		return fis;

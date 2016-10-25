@@ -133,9 +133,9 @@ public class PokerGui extends JFrame {
 				
 				try{
 					
-					poker.setPote( Double.parseDouble((String) txtpote.getValue())  / Double.parseDouble((String) txtrodada.getValue() ) * 10);
-					poker.setAposta(Double.parseDouble((String) txtaposta.getValue()) / Double.parseDouble((String) txtrodada.getValue())* 10);
-					poker.setFichas(Double.parseDouble((String) txtfichas.getValue()) / Double.parseDouble((String) txtrodada.getValue())* 10);
+					poker.setPote( Double.parseDouble((String) txtpote.getValue())  / Double.parseDouble((String) txtrodada.getValue() )*10);
+					poker.setAposta(Double.parseDouble((String) txtaposta.getValue()) / Double.parseDouble((String) txtrodada.getValue())*10);
+					poker.setFichas(Double.parseDouble((String) txtfichas.getValue()) / Double.parseDouble((String) txtrodada.getValue())*10);
 					poker.setMao(opcao.getValor());
 					
 				}catch(NumberFormatException e){
@@ -150,15 +150,18 @@ public class PokerGui extends JFrame {
 					fuzzy.Mostrar();
 					
 					
-						if(fuzzy.getDeffuzy() >= 0 & fuzzy.getDeffuzy() < 20){
+//						JOptionPane.showMessageDialog(null, //uzzy.getDeffuzy().d);
+					
+						if(fuzzy.getDeffuzy() >= 0 & fuzzy.getDeffuzy() < 0.2){
 							lblNewLabel.setText("Decisão: Corre (Fold)");
 						}
 						
-						if((fuzzy.getDeffuzy() >= 20) & (fuzzy.getDeffuzy() < 40)){
+						if((fuzzy.getDeffuzy() >= 0.2) & (fuzzy.getDeffuzy() < 0.6)){
 							lblNewLabel.setText("Decisão: Continue (Check)");
 						}
 						
-						if(fuzzy.getDeffuzy() > 40 & fuzzy.getDeffuzy() <= 60){
+						//if(fuzzy.getDeffuzy() > 4 & fuzzy.getDeffuzy() <= 6){
+						if(fuzzy.getDeffuzy() > 0.6){
 							lblNewLabel.setText("Decisão: Aumenta (Raise)");
 						}
 						
