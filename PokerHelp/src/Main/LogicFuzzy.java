@@ -6,6 +6,7 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.xml.soap.Text;
 
 import org.jfree.chart.JFreeChart;
 
@@ -61,13 +62,23 @@ public class LogicFuzzy {
 	}
 	
 	public void Mostrar(){
+		
+		System.out.println(fis.getVariable("pote").getValue()+"|"
+					+fis.getVariable("aposta").getValue()+"|"
+					+fis.getVariable("fichas").getValue()+"|"
+					+fis.getVariable("mao").getValue()+"|"
+					+fis.getVariable("acao").getValue()
+				
+				);
+		/*
+		System.out.println(".........................\n");
 		System.out.println("POTE: " + fis.getVariable("pote").getValue());
 		System.out.println("APOSTA: " + fis.getVariable("aposta").getValue());
 		System.out.println("FICHAS: " + fis.getVariable("fichas").getValue());
 		System.out.println("MAO: " + fis.getVariable("mao").getValue());
-		//System.out.println("ACAO: " + fis.getVariable("acao").getLinguisticTerms());
 		System.out.println("ACAO: " + fis.getVariable("acao").getValue());
-			
+		System.out.println(".........................\n");
+		*/
 	}
 	
 	public void grafico(){

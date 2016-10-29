@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 
 public class PokerGui extends JFrame {
@@ -36,7 +37,7 @@ public class PokerGui extends JFrame {
 		
 		//GUI
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 400, 500);
 				
 		Gui = new JPanel();
 		Gui.setToolTipText("");
@@ -46,69 +47,65 @@ public class PokerGui extends JFrame {
 		
 		//JLABEL
 		JLabel lblValorPote = new JLabel("VALOR RODADA");
-		lblValorPote.setBounds(23, 329, 109, 14);
+		lblValorPote.setBounds(157, 11, 109, 14);
 		Gui.add(lblValorPote);
 		
 		JLabel lblPokerhelp = new JLabel("PokerHelp");
-		lblPokerhelp.setBounds(22, 34, 89, 14);
+		lblPokerhelp.setIcon(new ImageIcon(".Archives/naipes.png"));
+		lblPokerhelp.setBounds(22, 11, 89, 14);
 		Gui.add(lblPokerhelp);
 		
 		JLabel lblAposta = new JLabel("APOSTA");
-		lblAposta.setBounds(171, 329, 109, 14);
+		lblAposta.setBounds(157, 192, 109, 14);
 		Gui.add(lblAposta);
 		
 		JLabel lblMao = new JLabel("FICHAS");
-		lblMao.setBounds(318, 329, 109, 14);
+		lblMao.setBounds(157, 258, 109, 14);
 		Gui.add(lblMao);
 			
 		JLabel lblMao_1 = new JLabel("MAO");
-		lblMao_1.setBounds(643, 329, 70, 14);
+		lblMao_1.setBounds(157, 370, 70, 14);
 		Gui.add(lblMao_1);
 		
-		JLabel lblNewLabel = new JLabel("Decis\u00E3o: ");
-		lblNewLabel.setFont(new Font("Sitka Text", Font.PLAIN, 45));
-		lblNewLabel.setBounds(23, 141, 700, 57);
-		Gui.add(lblNewLabel);
-		
-		JLabel label = new JLabel("Valor...");
-		label.setFont(new Font("Sitka Text", Font.PLAIN, 20));
-		label.setBounds(108, 195, 194, 26);
-		Gui.add(label);
+		JLabel lblvalor = new JLabel("Valor...");
+		lblvalor.setFont(new Font("Sitka Text", Font.PLAIN, 20));
+		lblvalor.setBounds(22, 155, 194, 26);
+		Gui.add(lblvalor);
 		
 		JLabel lblPote = new JLabel("POTE");
-		lblPote.setBounds(450, 330, 109, 14);
+		lblPote.setBounds(157, 314, 109, 14);
 		Gui.add(lblPote);
 		
 		//JTEXT
 		
 		//rodada
 		JFormattedTextField txtrodada = new JFormattedTextField(Mascara("####"));
-		txtrodada.setBounds(23, 354, 109, 20);
+		txtrodada.setBounds(157, 36, 109, 20);
 		txtrodada.setToolTipText("rodada");
 		Gui.add(txtrodada);
 		
 		//aposta
 		JFormattedTextField txtaposta = new JFormattedTextField(Mascara("####"));
 		txtaposta.setToolTipText("Aposta");
-		txtaposta.setBounds(171, 353, 109, 20);
+		txtaposta.setBounds(157, 220, 109, 20);
 		Gui.add(txtaposta);
 		
 		//fichas
 		JFormattedTextField txtfichas = new JFormattedTextField(Mascara("####"));
 		txtfichas.setToolTipText("Fichas");
-		txtfichas.setBounds(318, 353, 109, 20);
+		txtfichas.setBounds(157, 283, 109, 20);
 		Gui.add(txtfichas);
 		
 		//pote
 		JFormattedTextField txtpote = new JFormattedTextField(Mascara("####"));
 		txtpote.setToolTipText("Pote");
-		txtpote.setBounds(450, 354, 109, 20);
+		txtpote.setBounds(157, 339, 109, 20);
 		Gui.add(txtpote);
 		
 		//mao
 		JComboBox cmbmao = new JComboBox();
 		cmbmao.setModel(new DefaultComboBoxModel(MaoEnum.values()));
-		cmbmao.setBounds(585, 354, 171, 20);
+		cmbmao.setBounds(157, 395, 171, 20);
 		Gui.add(cmbmao);
 		
 	
@@ -149,51 +146,19 @@ public class PokerGui extends JFrame {
 					fuzzy.Calcular();
 					fuzzy.Mostrar();
 					
+					lblvalor.setText("Valor... " + fuzzy.getDeffuzy());
 					
-//						JOptionPane.showMessageDialog(null, //uzzy.getDeffuzy().d);
 					
-						if(fuzzy.getDeffuzy() >= 0 & fuzzy.getDeffuzy() < 0.2){
-							lblNewLabel.setText("Decisão: Corre (Fold)");
-						}
-						
-						if((fuzzy.getDeffuzy() >= 0.2) & (fuzzy.getDeffuzy() < 0.6)){
-							lblNewLabel.setText("Decisão: Continue (Check)");
-						}
-						
-						//if(fuzzy.getDeffuzy() > 4 & fuzzy.getDeffuzy() <= 6){
-						if(fuzzy.getDeffuzy() > 0.6){
-							lblNewLabel.setText("Decisão: Aumenta (Raise)");
-						}
-						
-						label.setText("Valor: " + fuzzy.getDeffuzy());
-						}
-	
-
-			
-		});
-		btnNewButton.setBounds(667, 395, 89, 23);
-		Gui.add(btnNewButton);
-		
-		JButton btnInicio = new JButton("Inicio Partida");
-		btnInicio.setBounds(23, 296, 109, 23);
-		Gui.add(btnInicio);
-		
-		JButton btnFimPartida = new JButton("Fim Partida");
-		btnFimPartida.setBounds(171, 295, 121, 23);
-		Gui.add(btnFimPartida);
-		
-		JButton btnVenceu = new JButton("Venceu");
-		btnVenceu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				fuzzy.um();
+					 		
 			}
 		});
-		btnVenceu.setBounds(23, 395, 109, 23);
-		Gui.add(btnVenceu);
+		btnNewButton.setBounds(22, 394, 89, 23);
+		Gui.add(btnNewButton);
 		
-		JButton btnPerdeu = new JButton("Perdeu");
-		btnPerdeu.setBounds(318, 395, 109, 23);
-		Gui.add(btnPerdeu);
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alan\\Desktop\\Quatro-Naipes.png"));
+		lblNewLabel.setBounds(22, 29, 103, 115);
+		Gui.add(lblNewLabel);
 		
 
 		JMenuBar menuBar = new JMenuBar();
