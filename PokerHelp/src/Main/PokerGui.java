@@ -57,11 +57,11 @@ public class PokerGui extends JFrame {
 		lblPokerhelp.setBounds(22, 11, 89, 14);
 		Gui.add(lblPokerhelp);
 		
-		JLabel lblAposta = new JLabel("APOSTA");
-		lblAposta.setBounds(157, 192, 109, 14);
+		JLabel lblAposta = new JLabel("APOSTA OPONENTE");
+		lblAposta.setBounds(157, 192, 138, 14);
 		Gui.add(lblAposta);
 		
-		JLabel lblMao = new JLabel("FICHAS");
+		JLabel lblMao = new JLabel("FICHAS JOGADOR");
 		lblMao.setBounds(157, 258, 109, 14);
 		Gui.add(lblMao);
 			
@@ -131,19 +131,20 @@ public class PokerGui extends JFrame {
 					poker.setFichas(Double.parseDouble((String) txtfichas.getValue()) / Double.parseDouble((String) txtrodada.getValue())*10);
 					poker.setMao(opcao.getValor());
 					
-				}catch(NumberFormatException e){
-					//JOptionPane.showMessageDialog(null, e);
-					JOptionPane.showMessageDialog(null, "Insira valores nas caixas");
-				}
-					
 					//Lógica Fuzzy
 					//LogicFuzzy fuzzy = new LogicFuzzy(poker);
 					fuzzy.setModelPoker(poker);
 					fuzzy.Calcular();
 					fuzzy.Mostrar();
 					
-					lblvalor.setText("Valor... " + fuzzy.getDeffuzy());
+					lblvalor.setText("Resultado... " + fuzzy.getDeffuzy());
 					
+				}catch(Exception e){
+					//JOptionPane.showMessageDialog(null, e);
+					JOptionPane.showMessageDialog(null, "Insira valores nas caixas");
+				}
+					
+							
 					
 					 		
 			}
@@ -183,22 +184,19 @@ public class PokerGui extends JFrame {
 						else{
 							poker.setMao(maobkp);
 						}
-
-
-							
 						
-					}catch(NumberFormatException e1){
-						
-						//JOptionPane.showMessageDialog(null, "Insira valores nas caixas");
-					}
-						
-						//Lógica Fuzzy
-						//LogicFuzzy fuzzy = new LogicFuzzy(poker);
 						fuzzy.setModelPoker(poker);
 						fuzzy.Calcular();
 						fuzzy.Mostrar();
 						
 						lblvalor.setText("Valor... " + fuzzy.getDeffuzy());
+
+							
+					}catch(Exception e1){
+						
+						JOptionPane.showMessageDialog(null, "Insira valores nas caixas");
+					}
+						
 
 				}
 				
@@ -207,6 +205,15 @@ public class PokerGui extends JFrame {
 			}
 		});
 		Gui.add(btnRandom);
+		
+		JFormattedTextField txtfichasoponente = new JFormattedTextField(Mascara("####"));
+		txtfichasoponente.setToolTipText("rodada");
+		txtfichasoponente.setBounds(157, 95, 109, 20);
+		Gui.add(txtfichasoponente);
+		
+		JLabel lblFichasOponente = new JLabel("FICHAS OPONENTE");
+		lblFichasOponente.setBounds(157, 70, 109, 14);
+		Gui.add(lblFichasOponente);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

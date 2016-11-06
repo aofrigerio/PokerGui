@@ -1,27 +1,11 @@
 package Main;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
+
 import java.text.NumberFormat;
 import java.util.Locale;
-
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.xml.soap.Text;
-
-import org.jfree.chart.JFreeChart;
-
 import net.sourceforge.jFuzzyLogic.FIS;
-import net.sourceforge.jFuzzyLogic.FunctionBlock;
-import net.sourceforge.jFuzzyLogic.defuzzifier.Defuzzifier;
 import net.sourceforge.jFuzzyLogic.plot.JDialogFis;
-import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
-import net.sourceforge.jFuzzyLogic.plot.JFuzzyChartImpl;
-import net.sourceforge.jFuzzyLogic.plot.JPanelFis;
-import net.sourceforge.jFuzzyLogic.plot.PlotWindow;
-import net.sourceforge.jFuzzyLogic.rule.Variable;
-
 
 public class LogicFuzzy {
 	
@@ -90,32 +74,6 @@ public class LogicFuzzy {
 	
 	public double getDeffuzy(){
 		return fis.getVariable("ACAO").getValue();
-	}
-	
-	
-
-	public void um(){
-		
-		/*
-		Graphics g = null;
-		Rectangle2D rect = new Rectangle2D.Double();	
-		FunctionBlock fb = new FunctionBlock(fis);
-		fb.getVariable("acao");	
-		Variable var = fb.getVariable("acao");		
-		JFuzzyChart.get().draw((Graphics2D) g, rect, var);
-		*/
-		//teste
-//		Graphics g = null;
-		Rectangle2D rect = new Rectangle2D.Double();	
-		FunctionBlock fb = new FunctionBlock(fis);
-		//fb.variablesSorted();	
-		Variable var = new Variable("acao");	
-		//JFuzzyChart.get().draw((Graphics2D) g, rect, var);
-		
-//		JFuzzyChart.get().chart(var, true);
-//		JFuzzyChartImpl.get().chart(var, dev , true);;
-
-		
 	}
 
 	
