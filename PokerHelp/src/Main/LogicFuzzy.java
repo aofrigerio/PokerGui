@@ -3,6 +3,8 @@ package Main;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -55,30 +57,23 @@ public class LogicFuzzy {
 	public void setModelPoker(ModelPoker pk1){
 		this.poker = pk1;
 		
-		fis.setVariable("aposta", poker.getAposta());	//aposta
-		fis.setVariable("fichas", poker.getFichas());	//fichas
-		fis.setVariable("mao", poker.getMao());	//mao
-		fis.setVariable("pote", poker.getPote());	//pote
+		fis.setVariable("APOSTA", poker.getAposta());	//aposta
+		fis.setVariable("FICHAS", poker.getFichas());	//fichas
+		fis.setVariable("MAO", poker.getMao());	//mao
+		fis.setVariable("POTE", poker.getPote());	//pote
 	}
 	
 	public void Mostrar(){
 		
-		System.out.println(fis.getVariable("pote").getValue()+"|"
-					+fis.getVariable("aposta").getValue()+"|"
-					+fis.getVariable("fichas").getValue()+"|"
-					+fis.getVariable("mao").getValue()+"|"
-					+fis.getVariable("acao").getValue()
-				
-				);
-		/*
-		System.out.println(".........................\n");
-		System.out.println("POTE: " + fis.getVariable("pote").getValue());
-		System.out.println("APOSTA: " + fis.getVariable("aposta").getValue());
-		System.out.println("FICHAS: " + fis.getVariable("fichas").getValue());
-		System.out.println("MAO: " + fis.getVariable("mao").getValue());
-		System.out.println("ACAO: " + fis.getVariable("acao").getValue());
-		System.out.println(".........................\n");
-		*/
+		Locale l = new Locale("pt","BR");
+		NumberFormat nf = NumberFormat.getInstance(l);
+		
+		System.out.println(nf.format(fis.getVariable("POTE").getValue()) +"|"
+				+nf.format(fis.getVariable("APOSTA").getValue())+"|"
+				+nf.format(fis.getVariable("FICHAS").getValue())+"|"
+				+nf.format(fis.getVariable("MAO").getValue())+"|"
+				+nf.format(fis.getVariable("ACAO").getValue())
+			);
 	}
 	
 	public void grafico(){
@@ -94,8 +89,9 @@ public class LogicFuzzy {
 	}
 	
 	public double getDeffuzy(){
-		return fis.getVariable("acao").getValue();
+		return fis.getVariable("ACAO").getValue();
 	}
+	
 	
 
 	public void um(){

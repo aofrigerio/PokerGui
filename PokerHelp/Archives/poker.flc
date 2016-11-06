@@ -2,54 +2,56 @@ FUNCTION_BLOCK poker
 
 // Define input variables
 VAR_INPUT
-    pote: REAL;
-    aposta: REAL;
-    fichas: REAL;
-    mao: REAL;
+    POTE: REAL;
+    APOSTA: REAL;
+    FICHAS: REAL;
+    MAO: REAL;
 END_VAR
 
 // Define output variable
 VAR_OUTPUT
-    acao: REAL;
+    ACAO: REAL;
 END_VAR
 
 // termo linguístico da variavel de entrada 'POTE'
-FUZZIFY pote
-    TERM low := (0, 1) (2,1) (3, 0) ; 
-    TERM mid := (2, 0) (3.5,1) (6,1) (8,0);
-    TERM high := (6, 0) (8,1) (10, 1);
+FUZZIFY POTE
+    TERM low := (0, 1) (4, 0) ; 
+    TERM mid := (2, 0) (4,1) (6,1) (8,0);
+    TERM high := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'APOSTA'
-FUZZIFY aposta
-    TERM low := (0, 1) (2,1) (3, 0) ; 
-    TERM mid := (2, 0) (3.5,1) (6,1) (8,0);
-    TERM high := (6, 0) (8,1) (10, 1);
+FUZZIFY APOSTA
+    TERM low := (0, 1) (4, 0) ; 
+    TERM mid := (2, 0) (4,1) (6,1) (8,0);
+    TERM high := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'FICHAS'
-FUZZIFY fichas
-    TERM low := (0, 1) (2,1) (3, 0) ; 
-    TERM mid := (2, 0) (3.5,1) (6,1) (8,0);
-    TERM high := (6, 0) (8,1) (10, 1);
+FUZZIFY FICHAS
+    TERM low := (0, 1) (4, 0) ; 
+    TERM mid := (2, 0) (4,1) (6,1) (8,0);
+    TERM high := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'APOSTA'
-FUZZIFY mao
-    TERM low := (0, 1) (2,1) (4, 0) ; 
-    TERM mid := (2, 0) (3.5,1) (6,1) (8,0);
-    TERM high := (6, 0) (8,1) (10, 1);
+
+FUZZIFY MAO
+    TERM low := (0, 1) (2, 0) ; 
+    TERM mid := (1, 0) (3,1) (6,1) (7,0);
+    TERM high := (5, 0) (10, 1);
 END_FUZZIFY
 
 
-// Defzzzify output variable 'acao'
-DEFUZZIFY acao
+// Defzzzify output variable 'ACAO'
+DEFUZZIFY ACAO
  
-    TERM fold := (0,0) (0.2,1) (0.3, 0) ; 
-    TERM call := (0.3, 0) (0.4,1) (0.6,1) (0.7,0);
-    TERM raise := (0.7, 0) (0.85,1) (1, 0);
+    TERM fold := (0,0) (0.25,1) (0.5, 0) ; 
+    TERM call := (0.3, 0) (0.5,1) (0.7,0) ;
+    TERM raise := (0.6, 0) (0.8,1) (1, 0);
 
-    METHOD : COA; //COG
+    //METHOD : COA;
+    METHOD : COG;
     // Default value is 0 (if no rule activates defuzzifier)
     DEFAULT := 0.4216;
     
@@ -65,116 +67,116 @@ RULEBLOCK No1
     // Use 'max' accumulation method
     ACCU : MAX;
 
-    //pote,aposta,fichas,mao
+    //POTE,APOSTA,FICHAS,MAO
 
-   RULE 1 : IF mao IS low AND pote IS low AND aposta IS low AND fichas IS low		
-   		THEN acao IS fold;
-	RULE 2 : IF mao IS low AND pote IS low AND aposta IS low AND fichas IS mid		
-		THEN acao IS call;
-	RULE 3 : IF mao IS low AND pote IS low AND aposta IS low AND fichas IS high		
-		THEN acao IS call;
-	RULE 4 : IF mao IS low AND pote IS low AND aposta IS mid AND fichas IS low		
-		THEN acao IS fold;
-	RULE 5 : IF mao IS low AND pote IS low AND aposta IS mid AND fichas IS mid		
-		THEN acao IS call;
-	RULE 6 : IF mao IS low AND pote IS low AND aposta IS mid AND fichas IS high		
-		THEN acao IS call;
-	RULE 7 : IF mao IS low AND pote IS low AND aposta IS high AND fichas IS low		
-		THEN acao IS fold;
-	RULE 8 : IF mao IS low AND pote IS low AND aposta IS high AND fichas IS mid		
-		THEN acao IS fold;
-	RULE 9 : IF mao IS low AND pote IS low AND aposta IS high AND fichas IS high		
-		THEN acao IS fold;
-	RULE 10 : IF mao IS low AND pote IS mid AND aposta IS low AND fichas IS low		
-		THEN acao IS call;
-	RULE 11 : IF mao IS low AND pote IS mid AND aposta IS low AND fichas IS mid		
-		THEN acao IS call;
-	RULE 12 : IF mao IS low AND pote IS mid AND aposta IS low AND fichas IS high		
-		THEN acao IS call;
-	RULE 13 : IF mao IS low AND pote IS mid AND aposta IS mid AND fichas IS low		
-		THEN acao IS fold;
-	RULE 14 : IF mao IS low AND pote IS mid AND aposta IS mid AND fichas IS mid		
-		THEN acao IS fold;
-	RULE 15 : IF mao IS low AND pote IS mid AND aposta IS mid AND fichas IS high		
-		THEN acao IS call;
-	RULE 16 : IF mao IS low AND pote IS mid AND aposta IS high AND fichas IS low		
-		THEN acao IS fold;
-	RULE 17 : IF mao IS low AND pote IS mid AND aposta IS high AND fichas IS mid		
-		THEN acao IS fold;
-	RULE 18 : IF mao IS low AND pote IS mid AND aposta IS high AND fichas IS high		
-		THEN acao IS fold;
-	RULE 19 : IF mao IS mid AND pote IS high AND aposta IS low AND fichas IS low		
-		THEN acao IS call;
-	RULE 20 : IF mao IS mid AND pote IS high AND aposta IS low AND fichas IS mid		
-		THEN acao IS call;
-	RULE 21 : IF mao IS mid AND pote IS high AND aposta IS low AND fichas IS high		
-		THEN acao IS call;
-	RULE 22 : IF mao IS mid AND pote IS high AND aposta IS mid AND fichas IS low		
-		THEN acao IS call;
-	RULE 23 : IF mao IS mid AND pote IS high AND aposta IS mid AND fichas IS mid		
-		THEN acao IS call;
-	RULE 24 : IF mao IS mid AND pote IS high AND aposta IS mid AND fichas IS high		
-		THEN acao IS call;
-	RULE 25 : IF mao IS mid AND pote IS high AND aposta IS high AND fichas IS low		
-		THEN acao IS fold;
-	RULE 26 : IF mao IS mid AND pote IS high AND aposta IS high AND fichas IS mid		
-		THEN acao IS call;
-	RULE 27 : IF mao IS mid AND pote IS high AND aposta IS high AND fichas IS high		
-		THEN acao IS call;
-	RULE 28 : IF mao IS mid AND pote IS low AND aposta IS low AND fichas IS low		
-		THEN acao IS fold;
-	RULE 29 : IF mao IS mid AND pote IS low AND aposta IS low AND fichas IS mid		
-		THEN acao IS call;
-	RULE 30 : IF mao IS mid AND pote IS low AND aposta IS low AND fichas IS high		
-		THEN acao IS call;
-	RULE 31 : IF mao IS mid AND pote IS low AND aposta IS mid AND fichas IS low		
-		THEN acao IS call;
-	RULE 32 : IF mao IS mid AND pote IS low AND aposta IS mid AND fichas IS mid		
-		THEN acao IS call;
-	RULE 33 : IF mao IS mid AND pote IS low AND aposta IS mid AND fichas IS high		
-		THEN acao IS call;
-	RULE 34 : IF mao IS mid AND pote IS low AND aposta IS high AND fichas IS low		
-		THEN acao IS fold;
-	RULE 35 : IF mao IS mid AND pote IS low AND aposta IS high AND fichas IS mid		
-		THEN acao IS call;
-	RULE 36 : IF mao IS mid AND pote IS low AND aposta IS high AND fichas IS high		
-		THEN acao IS call;
-	RULE 37 : IF mao IS high AND pote IS mid AND aposta IS low AND fichas IS low		
-		THEN acao IS raise;
-	RULE 38 : IF mao IS high AND pote IS mid AND aposta IS low AND fichas IS mid		
-		THEN acao IS raise;
-	RULE 39 : IF mao IS high AND pote IS mid AND aposta IS low AND fichas IS high		
-		THEN acao IS raise;
-	RULE 40 : IF mao IS high AND pote IS mid AND aposta IS mid AND fichas IS low		
-		THEN acao IS raise;
-	RULE 41 : IF mao IS high AND pote IS mid AND aposta IS mid AND fichas IS mid		
-		THEN acao IS raise;
-	RULE 42 : IF mao IS high AND pote IS mid AND aposta IS mid AND fichas IS high		
-		THEN acao IS raise;
-	RULE 43 : IF mao IS high AND pote IS mid AND aposta IS high AND fichas IS low		
-		THEN acao IS call;
-	RULE 44 : IF mao IS high AND pote IS mid AND aposta IS high AND fichas IS mid		
-		THEN acao IS call;
-	RULE 45 : IF mao IS high AND pote IS mid AND aposta IS high AND fichas IS high		
-		THEN acao IS call;
-	RULE 46 : IF mao IS high AND pote IS high AND aposta IS low AND fichas IS low		
-		THEN acao IS raise;
-	RULE 47 : IF mao IS high AND pote IS high AND aposta IS low AND fichas IS mid		
-		THEN acao IS raise;
-	RULE 48 : IF mao IS high AND pote IS high AND aposta IS low AND fichas IS high		
-		THEN acao IS raise;
-	RULE 49 : IF mao IS high AND pote IS high AND aposta IS mid AND fichas IS low		
-		THEN acao IS call;
-	RULE 50 : IF mao IS high AND pote IS high AND aposta IS mid AND fichas IS mid		
-		THEN acao IS raise;
-	RULE 51 : IF mao IS high AND pote IS high AND aposta IS mid AND fichas IS high		
-		THEN acao IS raise;
-	RULE 52 : IF mao IS high AND pote IS high AND aposta IS high AND fichas IS low		
-		THEN acao IS call;
-	RULE 53 : IF mao IS high AND pote IS high AND aposta IS high AND fichas IS mid		
-		THEN acao IS raise;
-	RULE 54 : IF mao IS high AND pote IS high AND aposta IS high AND fichas IS high		
-		THEN acao IS raise;   
+   RULE 1 : IF MAO IS low AND POTE IS low AND APOSTA IS low AND FICHAS IS low		
+   		THEN ACAO IS fold;
+	RULE 2 : IF MAO IS low AND POTE IS low AND APOSTA IS low AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 3 : IF MAO IS low AND POTE IS low AND APOSTA IS low AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 4 : IF MAO IS low AND POTE IS low AND APOSTA IS mid AND FICHAS IS low		
+		THEN ACAO IS fold;
+	RULE 5 : IF MAO IS low AND POTE IS low AND APOSTA IS mid AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 6 : IF MAO IS low AND POTE IS low AND APOSTA IS mid AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 7 : IF MAO IS low AND POTE IS low AND APOSTA IS high AND FICHAS IS low		
+		THEN ACAO IS fold;
+	RULE 8 : IF MAO IS low AND POTE IS low AND APOSTA IS high AND FICHAS IS mid		
+		THEN ACAO IS fold;
+	RULE 9 : IF MAO IS low AND POTE IS low AND APOSTA IS high AND FICHAS IS high		
+		THEN ACAO IS fold;
+	RULE 10 : IF MAO IS low AND POTE IS mid AND APOSTA IS low AND FICHAS IS low		
+		THEN ACAO IS call;
+	RULE 11 : IF MAO IS low AND POTE IS mid AND APOSTA IS low AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 12 : IF MAO IS low AND POTE IS mid AND APOSTA IS low AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 13 : IF MAO IS low AND POTE IS mid AND APOSTA IS mid AND FICHAS IS low		
+		THEN ACAO IS fold;
+	RULE 14 : IF MAO IS low AND POTE IS mid AND APOSTA IS mid AND FICHAS IS mid		
+		THEN ACAO IS fold;
+	RULE 15 : IF MAO IS low AND POTE IS mid AND APOSTA IS mid AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 16 : IF MAO IS low AND POTE IS mid AND APOSTA IS high AND FICHAS IS low		
+		THEN ACAO IS fold;
+	RULE 17 : IF MAO IS low AND POTE IS mid AND APOSTA IS high AND FICHAS IS mid		
+		THEN ACAO IS fold;
+	RULE 18 : IF MAO IS low AND POTE IS mid AND APOSTA IS high AND FICHAS IS high		
+		THEN ACAO IS fold;
+	RULE 19 : IF MAO IS mid AND POTE IS high AND APOSTA IS low AND FICHAS IS low		
+		THEN ACAO IS call;
+	RULE 20 : IF MAO IS mid AND POTE IS high AND APOSTA IS low AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 21 : IF MAO IS mid AND POTE IS high AND APOSTA IS low AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 22 : IF MAO IS mid AND POTE IS high AND APOSTA IS mid AND FICHAS IS low		
+		THEN ACAO IS call;
+	RULE 23 : IF MAO IS mid AND POTE IS high AND APOSTA IS mid AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 24 : IF MAO IS mid AND POTE IS high AND APOSTA IS mid AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 25 : IF MAO IS mid AND POTE IS high AND APOSTA IS high AND FICHAS IS low		
+		THEN ACAO IS fold;
+	RULE 26 : IF MAO IS mid AND POTE IS high AND APOSTA IS high AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 27 : IF MAO IS mid AND POTE IS high AND APOSTA IS high AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 28 : IF MAO IS mid AND POTE IS low AND APOSTA IS low AND FICHAS IS low		
+		THEN ACAO IS fold;
+	RULE 29 : IF MAO IS mid AND POTE IS low AND APOSTA IS low AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 30 : IF MAO IS mid AND POTE IS low AND APOSTA IS low AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 31 : IF MAO IS mid AND POTE IS low AND APOSTA IS mid AND FICHAS IS low		
+		THEN ACAO IS call;
+	RULE 32 : IF MAO IS mid AND POTE IS low AND APOSTA IS mid AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 33 : IF MAO IS mid AND POTE IS low AND APOSTA IS mid AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 34 : IF MAO IS mid AND POTE IS low AND APOSTA IS high AND FICHAS IS low		
+		THEN ACAO IS fold;
+	RULE 35 : IF MAO IS mid AND POTE IS low AND APOSTA IS high AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 36 : IF MAO IS mid AND POTE IS low AND APOSTA IS high AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 37 : IF MAO IS high AND POTE IS mid AND APOSTA IS low AND FICHAS IS low		
+		THEN ACAO IS raise;
+	RULE 38 : IF MAO IS high AND POTE IS mid AND APOSTA IS low AND FICHAS IS mid		
+		THEN ACAO IS raise;
+	RULE 39 : IF MAO IS high AND POTE IS mid AND APOSTA IS low AND FICHAS IS high		
+		THEN ACAO IS raise;
+	RULE 40 : IF MAO IS high AND POTE IS mid AND APOSTA IS mid AND FICHAS IS low		
+		THEN ACAO IS raise;
+	RULE 41 : IF MAO IS high AND POTE IS mid AND APOSTA IS mid AND FICHAS IS mid		
+		THEN ACAO IS raise;
+	RULE 42 : IF MAO IS high AND POTE IS mid AND APOSTA IS mid AND FICHAS IS high		
+		THEN ACAO IS raise;
+	RULE 43 : IF MAO IS high AND POTE IS mid AND APOSTA IS high AND FICHAS IS low		
+		THEN ACAO IS call;
+	RULE 44 : IF MAO IS high AND POTE IS mid AND APOSTA IS high AND FICHAS IS mid		
+		THEN ACAO IS call;
+	RULE 45 : IF MAO IS high AND POTE IS mid AND APOSTA IS high AND FICHAS IS high		
+		THEN ACAO IS call;
+	RULE 46 : IF MAO IS high AND POTE IS high AND APOSTA IS low AND FICHAS IS low		
+		THEN ACAO IS raise;
+	RULE 47 : IF MAO IS high AND POTE IS high AND APOSTA IS low AND FICHAS IS mid		
+		THEN ACAO IS raise;
+	RULE 48 : IF MAO IS high AND POTE IS high AND APOSTA IS low AND FICHAS IS high		
+		THEN ACAO IS raise;
+	RULE 49 : IF MAO IS high AND POTE IS high AND APOSTA IS mid AND FICHAS IS low		
+		THEN ACAO IS call;
+	RULE 50 : IF MAO IS high AND POTE IS high AND APOSTA IS mid AND FICHAS IS mid		
+		THEN ACAO IS raise;
+	RULE 51 : IF MAO IS high AND POTE IS high AND APOSTA IS mid AND FICHAS IS high		
+		THEN ACAO IS raise;
+	RULE 52 : IF MAO IS high AND POTE IS high AND APOSTA IS high AND FICHAS IS low		
+		THEN ACAO IS call;
+	RULE 53 : IF MAO IS high AND POTE IS high AND APOSTA IS high AND FICHAS IS mid		
+		THEN ACAO IS raise;
+	RULE 54 : IF MAO IS high AND POTE IS high AND APOSTA IS high AND FICHAS IS high		
+		THEN ACAO IS raise;   
 
 END_RULEBLOCK
 

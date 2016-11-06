@@ -19,6 +19,8 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import java.awt.Font;
@@ -119,13 +121,7 @@ public class PokerGui extends JFrame {
 			
 				MaoEnum opcao = (MaoEnum) cmbmao.getSelectedItem(); //Retorna a opcao do menu
 			
-				
-				//JOptionPane.showMessageDialog(null, Double.parseDouble((String) txtpote.getValue())  / Double.parseDouble((String) txtrodada.getValue() ));
-				//JOptionPane.showMessageDialog(null, txtrodada.getValue());
-				//JOptionPane.showMessageDialog(null, txtaposta.getValue());
-				//JOptionPane.showMessageDialog(null, txtfichas.getValue());
-				
-				//Total da rodada / valor * 100 = achamos a pocentagem. melhor para modelagem
+				//Total da rodada / valor * 10 = achamos a pocentagem. melhor para modelagem
 				
 				
 				try{
@@ -160,6 +156,57 @@ public class PokerGui extends JFrame {
 		lblNewLabel.setBounds(22, 29, 103, 115);
 		Gui.add(lblNewLabel);
 		
+		JButton btnRandom = new JButton("random");
+		btnRandom.setBounds(22, 338, 89, 23);
+		btnRandom.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+
+				
+				for (int i = 0; i < 1000 ; i++) {
+					Random poterandom = new Random();
+					Random apostasrandom = new Random(); 
+					Random fichasrandom = new Random(); 
+					Random maorandom = new Random(); 
+					
+					try{
+						
+						poker.setPote(poterandom.nextDouble()*10);
+						poker.setAposta(apostasrandom.nextDouble()*10);
+						poker.setFichas(fichasrandom.nextDouble()*10);
+						
+						int maobkp = maorandom.nextInt(8);
+						
+						if(maobkp==0){
+							poker.setMao(1);
+						}
+						else{
+							poker.setMao(maobkp);
+						}
+
+
+							
+						
+					}catch(NumberFormatException e1){
+						
+						//JOptionPane.showMessageDialog(null, "Insira valores nas caixas");
+					}
+						
+						//Lógica Fuzzy
+						//LogicFuzzy fuzzy = new LogicFuzzy(poker);
+						fuzzy.setModelPoker(poker);
+						fuzzy.Calcular();
+						fuzzy.Mostrar();
+						
+						lblvalor.setText("Valor... " + fuzzy.getDeffuzy());
+
+				}
+				
+				
+				
+			}
+		});
+		Gui.add(btnRandom);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
