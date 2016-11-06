@@ -80,7 +80,6 @@ public class PokerGui extends JFrame {
 		
 		//JTEXT
 		
-		//rodada
 		JFormattedTextField txtrodada = new JFormattedTextField(Mascara("####"));
 		txtrodada.setBounds(157, 36, 109, 20);
 		txtrodada.setToolTipText("rodada");
