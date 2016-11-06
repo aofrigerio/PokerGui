@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import Model.MaoEnum;
+import util.SoNumeros;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -80,25 +84,43 @@ public class PokerGui extends JFrame {
 		
 		//JTEXT
 		
-		JFormattedTextField txtrodada = new JFormattedTextField(Mascara("####"));
+		
+		//JFormattedTextField txtrodada = new JFormattedTextField(Mascara("####"));
+		JTextField txtrodada = new JTextField();
+		txtrodada.setDocument(new SoNumeros());
+		//JTextField txtrodada = new JTextField();
 		txtrodada.setBounds(157, 36, 109, 20);
 		txtrodada.setToolTipText("rodada");
-		Gui.add(txtrodada);
+		Gui.add(txtrodada);		
+		
+		
+		//JFormattedTextField txtfichasoponente = new JFormattedTextField(Mascara("####"));
+		JTextField txtfichasoponente = new JTextField();
+		txtfichasoponente.setDocument(new SoNumeros());
+		txtfichasoponente.setToolTipText("rodada");
+		txtfichasoponente.setBounds(157, 95, 109, 20);
+		Gui.add(txtfichasoponente);
 		
 		//aposta
-		JFormattedTextField txtaposta = new JFormattedTextField(Mascara("####"));
+		//JFormattedTextField txtaposta = new JFormattedTextField(Mascara("####"));
+		JTextField txtaposta = new JTextField();
+		txtaposta.setDocument(new SoNumeros());
 		txtaposta.setToolTipText("Aposta");
 		txtaposta.setBounds(157, 220, 109, 20);
 		Gui.add(txtaposta);
 		
 		//fichas
-		JFormattedTextField txtfichas = new JFormattedTextField(Mascara("####"));
+		//JFormattedTextField txtfichas = new JFormattedTextField(Mascara("####"));
+		JTextField txtfichas = new JTextField();
+		txtfichas.setDocument(new SoNumeros());
 		txtfichas.setToolTipText("Fichas");
 		txtfichas.setBounds(157, 283, 109, 20);
 		Gui.add(txtfichas);
 		
 		//pote
-		JFormattedTextField txtpote = new JFormattedTextField(Mascara("####"));
+		//JFormattedTextField txtpote = new JFormattedTextField(Mascara("####"));
+		JTextField txtpote = new JTextField();
+		txtpote.setDocument(new SoNumeros());
 		txtpote.setToolTipText("Pote");
 		txtpote.setBounds(157, 339, 109, 20);
 		Gui.add(txtpote);
@@ -125,9 +147,9 @@ public class PokerGui extends JFrame {
 				
 				try{
 					
-					poker.setPote( Double.parseDouble((String) txtpote.getValue())  / Double.parseDouble((String) txtrodada.getValue() )*10);
-					poker.setAposta(Double.parseDouble((String) txtaposta.getValue()) / Double.parseDouble((String) txtrodada.getValue())*10);
-					poker.setFichas(Double.parseDouble((String) txtfichas.getValue()) / Double.parseDouble((String) txtrodada.getValue())*10);
+					poker.setPote( Double.parseDouble((String) txtpote.getText())  / Double.parseDouble((String) txtrodada.getText())*10);
+					//poker.setAposta(Double.parseDouble((String) txtaposta.getText()()) / Double.parseDouble((String) txtrodada.getValue())*10);
+					poker.setFichas(Double.parseDouble((String) txtfichas.getText()) / Double.parseDouble((String) txtrodada.getText())*10);
 					poker.setMao(opcao.getValor());
 					
 					//Lógica Fuzzy
@@ -204,11 +226,6 @@ public class PokerGui extends JFrame {
 			}
 		});
 		Gui.add(btnRandom);
-		
-		JFormattedTextField txtfichasoponente = new JFormattedTextField(Mascara("####"));
-		txtfichasoponente.setToolTipText("rodada");
-		txtfichasoponente.setBounds(157, 95, 109, 20);
-		Gui.add(txtfichasoponente);
 		
 		JLabel lblFichasOponente = new JLabel("FICHAS OPONENTE");
 		lblFichasOponente.setBounds(157, 70, 109, 14);
