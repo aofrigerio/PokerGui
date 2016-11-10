@@ -29,6 +29,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import javax.swing.JSpinner;
 
 
 public class PokerGui extends JFrame {
@@ -131,6 +132,15 @@ public class PokerGui extends JFrame {
 		cmbmao.setBounds(157, 395, 171, 20);
 		Gui.add(cmbmao);
 		
+		//spinners
+		
+		JSpinner spnpartida = new JSpinner();
+		spnpartida.setBounds(56, 255, 55, 20);
+		Gui.add(spnpartida);
+		
+		JSpinner spnrodada = new JSpinner();
+		spnrodada.setBounds(56, 293, 55, 20);
+		Gui.add(spnrodada);
 	
 		//botões		
 		JButton btnNewButton = new JButton("Calcular");
@@ -148,7 +158,7 @@ public class PokerGui extends JFrame {
 				try{
 					
 					poker.setPote( Double.parseDouble((String) txtpote.getText())  / Double.parseDouble((String) txtrodada.getText())*10);
-					//poker.setAposta(Double.parseDouble((String) txtaposta.getText()()) / Double.parseDouble((String) txtrodada.getValue())*10);
+					poker.setAposta(Double.parseDouble((String) txtaposta.getText()) / Double.parseDouble((String) txtfichasoponente.getText())*10);
 					poker.setFichas(Double.parseDouble((String) txtfichas.getText()) / Double.parseDouble((String) txtrodada.getText())*10);
 					poker.setMao(opcao.getValor());
 					
@@ -156,7 +166,12 @@ public class PokerGui extends JFrame {
 					//LogicFuzzy fuzzy = new LogicFuzzy(poker);
 					fuzzy.setModelPoker(poker);
 					fuzzy.Calcular();
+					
+					System.out.print(spnpartida.getValue() + " " + spnrodada.getValue() + " ");
+					
 					fuzzy.Mostrar();
+					
+					
 					
 					lblvalor.setText("Resultado... " + fuzzy.getDeffuzy());
 					
@@ -225,11 +240,26 @@ public class PokerGui extends JFrame {
 				
 			}
 		});
-		Gui.add(btnRandom);
+		//Gui.add(btnRandom);
 		
 		JLabel lblFichasOponente = new JLabel("FICHAS OPONENTE");
 		lblFichasOponente.setBounds(157, 70, 109, 14);
 		Gui.add(lblFichasOponente);
+		
+		JButton btnreset = new JButton("Reset");
+		btnreset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				txtaposta.setText("0");;
+				txtfichas.setText("1000");;
+				txtfichasoponente.setText("1000");;
+				txtpote.setText("0");;
+				txtrodada.setText("1000");
+			}
+		});
+		btnreset.setBounds(22, 220, 89, 23);
+		Gui.add(btnreset);
+	
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

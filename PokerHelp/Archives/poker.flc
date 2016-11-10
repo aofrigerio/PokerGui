@@ -15,43 +15,44 @@ END_VAR
 
 // termo linguístico da variavel de entrada 'POTE'
 FUZZIFY POTE
-    TERM low := (0, 1) (4, 0) ; 
-    TERM mid := (2, 0) (4,1) (6,1) (8,0);
-    TERM high := (6, 0) (10, 1);
+    TERM baixo := (0, 1) (4, 0) ; 
+    TERM medio := (2, 0) (4,1) (6,1) (8,0);
+    TERM alto := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'APOSTA'
 FUZZIFY APOSTA
-    TERM low := (0, 1) (4, 0) ; 
-    TERM mid := (2, 0) (4,1) (6,1) (8,0);
-    TERM high := (6, 0) (10, 1);
+    TERM baixo := (0, 1) (4, 0) ; 
+    TERM medio := (2, 0) (4,1) (6,1) (8,0);
+    TERM alto := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'FICHAS'
 FUZZIFY FICHAS
-    TERM low := (0, 1) (4, 0) ; 
-    TERM mid := (2, 0) (4,1) (6,1) (8,0);
-    TERM high := (6, 0) (10, 1);
+    TERM baixo := (0, 1) (4, 0) ; 
+    TERM medio := (2, 0) (4,1) (6,1) (8,0);
+    TERM alto := (6, 0) (10, 1);
 END_FUZZIFY
 
 // termo linguístico da variavel de entrada 'APOSTA'
 
 FUZZIFY MAO
-    TERM low := (0, 1) (2, 0) ; 
-    TERM mid := (1, 0) (3,1) (6,1) (7,0);
-    TERM high := (5, 0) (10, 1);
+    TERM baixo := (0, 1) (2, 0) ; 
+    TERM medio := (1, 0) (3,1) (6,1) (7,0);
+    TERM alto := (5, 0) (10, 1);
 END_FUZZIFY
 
 
 // Defzzzify output variable 'ACAO'
 DEFUZZIFY ACAO
  
-    TERM fold := (0,0) (0.25,1) (0.5, 0) ; 
-    TERM call := (0.3, 0) (0.5,1) (0.7,0) ;
-    TERM raise := (0.6, 0) (0.8,1) (1, 0);
+    TERM corre := (0,0) (0.25,1) (0.5, 0) ; 
+    TERM continue := (0.3, 0) (0.5,1) (0.7,0) ;
+    TERM aumente := (0.6, 0) (0.8,1) (1, 0);
 
     //METHOD : COA;
-    METHOD : COG;
+    //METHOD : COG;
+    METHOD : RM;
     // Default value is 0 (if no rule activates defuzzifier)
     DEFAULT := 0.4216;
     
@@ -69,114 +70,114 @@ RULEBLOCK No1
 
     //POTE,APOSTA,FICHAS,MAO
 
-   RULE 1 : IF MAO IS low AND POTE IS low AND APOSTA IS low AND FICHAS IS low		
-   		THEN ACAO IS fold;
-	RULE 2 : IF MAO IS low AND POTE IS low AND APOSTA IS low AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 3 : IF MAO IS low AND POTE IS low AND APOSTA IS low AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 4 : IF MAO IS low AND POTE IS low AND APOSTA IS mid AND FICHAS IS low		
-		THEN ACAO IS fold;
-	RULE 5 : IF MAO IS low AND POTE IS low AND APOSTA IS mid AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 6 : IF MAO IS low AND POTE IS low AND APOSTA IS mid AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 7 : IF MAO IS low AND POTE IS low AND APOSTA IS high AND FICHAS IS low		
-		THEN ACAO IS fold;
-	RULE 8 : IF MAO IS low AND POTE IS low AND APOSTA IS high AND FICHAS IS mid		
-		THEN ACAO IS fold;
-	RULE 9 : IF MAO IS low AND POTE IS low AND APOSTA IS high AND FICHAS IS high		
-		THEN ACAO IS fold;
-	RULE 10 : IF MAO IS low AND POTE IS mid AND APOSTA IS low AND FICHAS IS low		
-		THEN ACAO IS call;
-	RULE 11 : IF MAO IS low AND POTE IS mid AND APOSTA IS low AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 12 : IF MAO IS low AND POTE IS mid AND APOSTA IS low AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 13 : IF MAO IS low AND POTE IS mid AND APOSTA IS mid AND FICHAS IS low		
-		THEN ACAO IS fold;
-	RULE 14 : IF MAO IS low AND POTE IS mid AND APOSTA IS mid AND FICHAS IS mid		
-		THEN ACAO IS fold;
-	RULE 15 : IF MAO IS low AND POTE IS mid AND APOSTA IS mid AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 16 : IF MAO IS low AND POTE IS mid AND APOSTA IS high AND FICHAS IS low		
-		THEN ACAO IS fold;
-	RULE 17 : IF MAO IS low AND POTE IS mid AND APOSTA IS high AND FICHAS IS mid		
-		THEN ACAO IS fold;
-	RULE 18 : IF MAO IS low AND POTE IS mid AND APOSTA IS high AND FICHAS IS high		
-		THEN ACAO IS fold;
-	RULE 19 : IF MAO IS mid AND POTE IS high AND APOSTA IS low AND FICHAS IS low		
-		THEN ACAO IS call;
-	RULE 20 : IF MAO IS mid AND POTE IS high AND APOSTA IS low AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 21 : IF MAO IS mid AND POTE IS high AND APOSTA IS low AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 22 : IF MAO IS mid AND POTE IS high AND APOSTA IS mid AND FICHAS IS low		
-		THEN ACAO IS call;
-	RULE 23 : IF MAO IS mid AND POTE IS high AND APOSTA IS mid AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 24 : IF MAO IS mid AND POTE IS high AND APOSTA IS mid AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 25 : IF MAO IS mid AND POTE IS high AND APOSTA IS high AND FICHAS IS low		
-		THEN ACAO IS fold;
-	RULE 26 : IF MAO IS mid AND POTE IS high AND APOSTA IS high AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 27 : IF MAO IS mid AND POTE IS high AND APOSTA IS high AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 28 : IF MAO IS mid AND POTE IS low AND APOSTA IS low AND FICHAS IS low		
-		THEN ACAO IS fold;
-	RULE 29 : IF MAO IS mid AND POTE IS low AND APOSTA IS low AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 30 : IF MAO IS mid AND POTE IS low AND APOSTA IS low AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 31 : IF MAO IS mid AND POTE IS low AND APOSTA IS mid AND FICHAS IS low		
-		THEN ACAO IS call;
-	RULE 32 : IF MAO IS mid AND POTE IS low AND APOSTA IS mid AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 33 : IF MAO IS mid AND POTE IS low AND APOSTA IS mid AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 34 : IF MAO IS mid AND POTE IS low AND APOSTA IS high AND FICHAS IS low		
-		THEN ACAO IS fold;
-	RULE 35 : IF MAO IS mid AND POTE IS low AND APOSTA IS high AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 36 : IF MAO IS mid AND POTE IS low AND APOSTA IS high AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 37 : IF MAO IS high AND POTE IS mid AND APOSTA IS low AND FICHAS IS low		
-		THEN ACAO IS raise;
-	RULE 38 : IF MAO IS high AND POTE IS mid AND APOSTA IS low AND FICHAS IS mid		
-		THEN ACAO IS raise;
-	RULE 39 : IF MAO IS high AND POTE IS mid AND APOSTA IS low AND FICHAS IS high		
-		THEN ACAO IS raise;
-	RULE 40 : IF MAO IS high AND POTE IS mid AND APOSTA IS mid AND FICHAS IS low		
-		THEN ACAO IS raise;
-	RULE 41 : IF MAO IS high AND POTE IS mid AND APOSTA IS mid AND FICHAS IS mid		
-		THEN ACAO IS raise;
-	RULE 42 : IF MAO IS high AND POTE IS mid AND APOSTA IS mid AND FICHAS IS high		
-		THEN ACAO IS raise;
-	RULE 43 : IF MAO IS high AND POTE IS mid AND APOSTA IS high AND FICHAS IS low		
-		THEN ACAO IS call;
-	RULE 44 : IF MAO IS high AND POTE IS mid AND APOSTA IS high AND FICHAS IS mid		
-		THEN ACAO IS call;
-	RULE 45 : IF MAO IS high AND POTE IS mid AND APOSTA IS high AND FICHAS IS high		
-		THEN ACAO IS call;
-	RULE 46 : IF MAO IS high AND POTE IS high AND APOSTA IS low AND FICHAS IS low		
-		THEN ACAO IS raise;
-	RULE 47 : IF MAO IS high AND POTE IS high AND APOSTA IS low AND FICHAS IS mid		
-		THEN ACAO IS raise;
-	RULE 48 : IF MAO IS high AND POTE IS high AND APOSTA IS low AND FICHAS IS high		
-		THEN ACAO IS raise;
-	RULE 49 : IF MAO IS high AND POTE IS high AND APOSTA IS mid AND FICHAS IS low		
-		THEN ACAO IS call;
-	RULE 50 : IF MAO IS high AND POTE IS high AND APOSTA IS mid AND FICHAS IS mid		
-		THEN ACAO IS raise;
-	RULE 51 : IF MAO IS high AND POTE IS high AND APOSTA IS mid AND FICHAS IS high		
-		THEN ACAO IS raise;
-	RULE 52 : IF MAO IS high AND POTE IS high AND APOSTA IS high AND FICHAS IS low		
-		THEN ACAO IS call;
-	RULE 53 : IF MAO IS high AND POTE IS high AND APOSTA IS high AND FICHAS IS mid		
-		THEN ACAO IS raise;
-	RULE 54 : IF MAO IS high AND POTE IS high AND APOSTA IS high AND FICHAS IS high		
-		THEN ACAO IS raise;   
+   RULE 1 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS baixo AND FICHAS IS baixo		
+   		THEN ACAO IS corre;
+	RULE 2 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS baixo AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 3 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS baixo AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 4 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS medio AND FICHAS IS baixo		
+		THEN ACAO IS corre;
+	RULE 5 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS medio AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 6 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS medio AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 7 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS alto AND FICHAS IS baixo		
+		THEN ACAO IS corre;
+	RULE 8 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS alto AND FICHAS IS medio		
+		THEN ACAO IS corre;
+	RULE 9 : IF MAO IS baixo AND POTE IS baixo AND APOSTA IS alto AND FICHAS IS alto		
+		THEN ACAO IS corre;
+	RULE 10 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS baixo AND FICHAS IS baixo		
+		THEN ACAO IS continue;
+	RULE 11 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS baixo AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 12 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS baixo AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 13 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS medio AND FICHAS IS baixo		
+		THEN ACAO IS corre;
+	RULE 14 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS medio AND FICHAS IS medio		
+		THEN ACAO IS corre;
+	RULE 15 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS medio AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 16 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS alto AND FICHAS IS baixo		
+		THEN ACAO IS corre;
+	RULE 17 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS alto AND FICHAS IS medio		
+		THEN ACAO IS corre;
+	RULE 18 : IF MAO IS baixo AND POTE IS medio AND APOSTA IS alto AND FICHAS IS alto		
+		THEN ACAO IS corre;
+	RULE 19 : IF MAO IS medio AND POTE IS alto AND APOSTA IS baixo AND FICHAS IS baixo		
+		THEN ACAO IS continue;
+	RULE 20 : IF MAO IS medio AND POTE IS alto AND APOSTA IS baixo AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 21 : IF MAO IS medio AND POTE IS alto AND APOSTA IS baixo AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 22 : IF MAO IS medio AND POTE IS alto AND APOSTA IS medio AND FICHAS IS baixo		
+		THEN ACAO IS continue;
+	RULE 23 : IF MAO IS medio AND POTE IS alto AND APOSTA IS medio AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 24 : IF MAO IS medio AND POTE IS alto AND APOSTA IS medio AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 25 : IF MAO IS medio AND POTE IS alto AND APOSTA IS alto AND FICHAS IS baixo		
+		THEN ACAO IS corre;
+	RULE 26 : IF MAO IS medio AND POTE IS alto AND APOSTA IS alto AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 27 : IF MAO IS medio AND POTE IS alto AND APOSTA IS alto AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 28 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS baixo AND FICHAS IS baixo		
+		THEN ACAO IS corre;
+	RULE 29 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS baixo AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 30 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS baixo AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 31 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS medio AND FICHAS IS baixo		
+		THEN ACAO IS continue;
+	RULE 32 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS medio AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 33 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS medio AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 34 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS alto AND FICHAS IS baixo		
+		THEN ACAO IS corre;
+	RULE 35 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS alto AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 36 : IF MAO IS medio AND POTE IS baixo AND APOSTA IS alto AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 37 : IF MAO IS alto AND POTE IS medio AND APOSTA IS baixo AND FICHAS IS baixo		
+		THEN ACAO IS aumente;
+	RULE 38 : IF MAO IS alto AND POTE IS medio AND APOSTA IS baixo AND FICHAS IS medio		
+		THEN ACAO IS aumente;
+	RULE 39 : IF MAO IS alto AND POTE IS medio AND APOSTA IS baixo AND FICHAS IS alto		
+		THEN ACAO IS aumente;
+	RULE 40 : IF MAO IS alto AND POTE IS medio AND APOSTA IS medio AND FICHAS IS baixo		
+		THEN ACAO IS aumente;
+	RULE 41 : IF MAO IS alto AND POTE IS medio AND APOSTA IS medio AND FICHAS IS medio		
+		THEN ACAO IS aumente;
+	RULE 42 : IF MAO IS alto AND POTE IS medio AND APOSTA IS medio AND FICHAS IS alto		
+		THEN ACAO IS aumente;
+	RULE 43 : IF MAO IS alto AND POTE IS medio AND APOSTA IS alto AND FICHAS IS baixo		
+		THEN ACAO IS continue;
+	RULE 44 : IF MAO IS alto AND POTE IS medio AND APOSTA IS alto AND FICHAS IS medio		
+		THEN ACAO IS continue;
+	RULE 45 : IF MAO IS alto AND POTE IS medio AND APOSTA IS alto AND FICHAS IS alto		
+		THEN ACAO IS continue;
+	RULE 46 : IF MAO IS alto AND POTE IS alto AND APOSTA IS baixo AND FICHAS IS baixo		
+		THEN ACAO IS aumente;
+	RULE 47 : IF MAO IS alto AND POTE IS alto AND APOSTA IS baixo AND FICHAS IS medio		
+		THEN ACAO IS aumente;
+	RULE 48 : IF MAO IS alto AND POTE IS alto AND APOSTA IS baixo AND FICHAS IS alto		
+		THEN ACAO IS aumente;
+	RULE 49 : IF MAO IS alto AND POTE IS alto AND APOSTA IS medio AND FICHAS IS baixo		
+		THEN ACAO IS continue;
+	RULE 50 : IF MAO IS alto AND POTE IS alto AND APOSTA IS medio AND FICHAS IS medio		
+		THEN ACAO IS aumente;
+	RULE 51 : IF MAO IS alto AND POTE IS alto AND APOSTA IS medio AND FICHAS IS alto		
+		THEN ACAO IS aumente;
+	RULE 52 : IF MAO IS alto AND POTE IS alto AND APOSTA IS alto AND FICHAS IS baixo		
+		THEN ACAO IS continue;
+	RULE 53 : IF MAO IS alto AND POTE IS alto AND APOSTA IS alto AND FICHAS IS medio		
+		THEN ACAO IS aumente;
+	RULE 54 : IF MAO IS alto AND POTE IS alto AND APOSTA IS alto AND FICHAS IS alto		
+		THEN ACAO IS aumente;   
 
 END_RULEBLOCK
 

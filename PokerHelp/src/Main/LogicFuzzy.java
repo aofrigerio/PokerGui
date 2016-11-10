@@ -52,10 +52,12 @@ public class LogicFuzzy {
 		Locale l = new Locale("pt","BR");
 		NumberFormat nf = NumberFormat.getInstance(l);
 		
-		System.out.println(nf.format(fis.getVariable("POTE").getValue()) +"|"
-				+nf.format(fis.getVariable("APOSTA").getValue())+"|"
-				+nf.format(fis.getVariable("FICHAS").getValue())+"|"
-				+nf.format(fis.getVariable("MAO").getValue())+"|"
+		System.out.println(
+				
+				nf.format(fis.getVariable("POTE").getValue()) +" "
+				+nf.format(fis.getVariable("APOSTA").getValue())+" "
+				+nf.format(fis.getVariable("FICHAS").getValue())+" "
+				+nf.format(fis.getVariable("MAO").getValue())+" "
 				+nf.format(fis.getVariable("ACAO").getValue())
 			);
 	}
